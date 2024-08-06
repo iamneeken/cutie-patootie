@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>To cutie patootutu</title>
+    </head>
+    <style>
+        body {
+            transition: background-image 1s ease-in-out;
+            background-color: black;
+        }
+        .cutie-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 100vh;
+        }
+    </style>
+    <body>
+        <div class="cutie-container">
+            <select id="resolution-select">
+                <option value="0">Select</option>
+                <option value="1">144p</option>
+                <option value="2">240p</option>
+                <option value="3">720p</option>
+                <option value="4">1080p</option>
+                <option value="5">4k</option>
+            </select>
+        </div>
+    </body>
+    <script>
+        let currentIndex = 0;
+        function takePutaliInput() {
+            const putaliInput = prompt(
+                'Say "I am cutie patootie" to proceed further:'
+            );
+
+            if (
+                putaliInput.toLowerCase() ===
+                "i am cutie patootie".toLowerCase()
+            ) {
+                alert("Thank you! You may proceed. hehehhehehe!");
+            } else {
+                takePutaliInput();
+            }
+        }
+        takePutaliInput();
+
+        function rollImage(optionNumber) {
+            console.log(optionNumber);
+
+            if (optionNumber == 1) {
+                let bodyElem = document.querySelector("body");
+                bodyElem.style.backgroundImage = "url(144p.png)";
+            } else if (optionNumber == 2) {
+                let bodyElem = document.querySelector("body");
+                bodyElem.style.backgroundImage = "url(240p.png)";
+            } else if (optionNumber == 3) {
+                let bodyElem = document.querySelector("body");
+                bodyElem.style.backgroundImage = "url(720p.png)";
+            } else if (optionNumber == 4) {
+                let bodyElem = document.querySelector("body");
+                bodyElem.style.backgroundImage = "url(1080p.png)";
+            } else if (optionNumber == 5) {
+                random4kPics();
+            }
+        }
+
+        function random4kPics() {
+            const randomCutiePics = [
+                "4k-1.png",
+                "4k-2.png",
+                "4k-3.png",
+                "4k-4.png",
+                "4k-5.png",
+            ];
+
+            let currentIndex = 0;
+            const intervalDuration = 2000;
+
+            function updateBackgroundImage() {
+                let bodyElem = document.querySelector("body");
+                let newBackgroundImage = `url("${randomCutiePics[currentIndex]}")`;
+                bodyElem.style.backgroundImage = newBackgroundImage;
+
+                currentIndex++;
+
+                if (currentIndex >= randomCutiePics.length) {
+                    clearInterval(intervalId);
+                }
+            }
+
+            // Start the interval
+            const intervalId = setInterval(
+                updateBackgroundImage,
+                intervalDuration
+            );
+        }
+
+        const selectElement = document.getElementById("resolution-select");
+        selectElement.addEventListener("change", (event) => {
+            const selectedValue = event.target.value;
+            rollImage(event.target.value);
+        });
+    </script>
+</html>
